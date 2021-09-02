@@ -43,6 +43,7 @@ jobs:
       - name: Set env
         run: |
           echo "RELEASE_VERSION=$(git tag | sort -V | tail -1 | sed 's/v//')" >> $GITHUB_ENV
+          
       - name: Display Current & Next Versions For Release
         if: steps.semantic.outputs.new_release_published == 'true'
         run: |
