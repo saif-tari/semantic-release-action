@@ -39,3 +39,31 @@ jobs:
           echo ${{ steps.semantic.outputs.new_release_major_version }}
           echo ${{ steps.semantic.outputs.new_release_minor_version }}
           echo ${{ steps.semantic.outputs.new_release_patch_version }}
+          
+      - name: Set env
+        run: |
+          echo "RELEASE_VERSION=$(git tag | sort -V | tail -1 | sed 's/v//')" >> $GITHUB_ENV
+      - name: Display Current & Next Versions For Release
+        if: steps.semantic.outputs.new_release_published == 'true'
+        run: |
+          export GITHUB_SHA_SHORT=$(git rev-parse --short $GITHUB_SHA)
+          export GITHUB_NUM_COMMIT=$(git rev-list  $(git rev-list --tags --no-walk --max-count=1)..HEAD --count)
+          export NEXT_VERSION=${{ steps.semantic.outputs.new_release_version }}
+          echo "The next release version $NEXT_VERSION}}"
+          echo "Current Version  $NEXT_VERSION-$GITHUB_NUM_COMMIT.$GITHUB_SHA_SHORT"
+      - name: Display Current when no release changes found
+        if: steps.semantic.outputs.new_release_published == 'false' && env.RELEASE_VERSION != ''
+        run: |
+          export GITHUB_SHA_SHORT=$(git rev-parse --short $GITHUB_SHA)
+          export GITHUB_NUM_COMMIT=$(git rev-list  $(git rev-list --tags --no-walk --max-count=1)..HEAD --count)
+          export NEXT_VERSION=$(git tag | sort -V | tail -1 | sed 's/v//')
+          echo "The next release version $NEXT_VERSION}}"
+          echo "Current Version  $NEXT_VERSION-$GITHUB_NUM_COMMIT.$GITHUB_SHA_SHORT"
+      - name: Display Current when with no previous release
+        if: steps.semantic.outputs.new_release_published == 'false' && env.RELEASE_VERSION == ''
+        run: |
+          export GITHUB_SHA_SHORT=$(git rev-parse --short $GITHUB_SHA)
+          export GITHUB_NUM_COMMIT=$(git rev-list  $(git rev-list --tags --no-walk --max-count=1)..HEAD --count)
+          export NEXT_VERSION="1.0.0"
+          echo "The next release version $NEXT_VERSION}}"
+          echo "Current Version  $NEXT_VERSION-$GITHUB_NUM_COMMIT.$GITHUB_SHA_SHORT"
