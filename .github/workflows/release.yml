@@ -25,6 +25,9 @@ jobs:
         with:
           semantic_version: 15.13.28  # It is recommended to specify specifying version range
                                   # for semantic-release.        
+          extra_plugins: |
+            @semantic-release/git
+            @semantic-release/changelog
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
