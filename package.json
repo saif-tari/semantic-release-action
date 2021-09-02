@@ -1,5 +1,5 @@
 {
-  "name": "@cycjimmy/semantic-release-action",
+  "name": "@saiftari/semantic-release-action",
   "version": "2.5.4",
   "description": "GitHub Action for Semantic Release",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cycjimmy/semantic-release-action.git"
+    "url": "git+https://github.com/saif-tari/semantic-release-action.git"
   },
   "keywords": [
     "semantic-release",
