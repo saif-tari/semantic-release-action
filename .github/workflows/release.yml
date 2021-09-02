@@ -22,7 +22,6 @@ jobs:
 
       - name: Semantic Release
         uses: saif-tari/semantic-release-action@v2
-        id: saif ka semantic
         with:
           semantic_version: 15.13.28  # It is recommended to specify specifying version range
                                   # for semantic-release.        
