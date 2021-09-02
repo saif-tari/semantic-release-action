@@ -20,16 +20,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Semantic Release
-        uses: saif-tari/semantic-release-action@v2
-        id: semantic
-        with:
-          extra_plugins: |
-            @semantic-release/git
-            @semantic-release/changelog
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      #- name: Semantic Release
+      #  uses: saif-tari/semantic-release-action@v2
+      #  id: semantic
+      #  with:
+      #    extra_plugins: |
+      #      @semantic-release/git
+      #      @semantic-release/changelog
+      #  env:
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+       #   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Test Outputs
         run: |
